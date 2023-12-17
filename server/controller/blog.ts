@@ -74,8 +74,15 @@ export const update = async (event: H3Event) => {
 			title: body.title,
 			content: body.content,
 		})
+		console.log("result controller ", result)
+		if (result === 0) {
+			throw createError({
+				status: 404,
+				message: "Not found",
+			})
+		}
 		return {
-			data: result,
+			data: await BlogModel.getById(+idBlog),
 		}
 	} catch (error: any) {
 		console.log(error)

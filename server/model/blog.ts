@@ -53,15 +53,17 @@ const update = async (
 	const result = await new Promise<number>((resolve, reject) => {
 		connection.run(
 			"UPDATE blogs SET title = ?, content = ?, updatedAt = ? WHERE id = ?",
-			[blog.title, blog.content, Date.now.toString, +idBlog],
+			[blog.title, blog.content, new Date().toISOString(), +idBlog],
 			function (err) {
 				if (err) {
 					reject(err)
 				}
-				resolve(this.lastID)
+				resolve(this.changes)
 			}
 		)
 	})
+
+	console.log("result model ", result)
 	return result
 }
 

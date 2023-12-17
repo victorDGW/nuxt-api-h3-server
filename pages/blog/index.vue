@@ -1,13 +1,19 @@
 
 <template>
   <div>
-    <h1>HOME PAGE</h1>
+    <h1>Blog List</h1>
     <button>
       <NuxtLink to="/blog/create">Add Blog</NuxtLink>
     </button>
     <div v-for="blog in items?.data" :key="blog.id">
       <h2>{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
       <p>{{ blog.content }}</p>
+      <span>crée le : {{ blog.createdAt }}</span>
+      <br />
+      <span>modifé le : {{ blog.updatedAt }}</span>
+
+
+      <br />
       <NuxtLink :to="`/blog/${blog.id}`">Detail / edit</NuxtLink>
 
     </div>
