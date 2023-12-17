@@ -4,7 +4,8 @@
         <div v-if="blog && !isEdit">
             <h2>{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
             <p>{{ blog.content }}</p>
-
+            <img width='400px' :src="blog.picture" alt="blog picture" />
+            <br />
             <button @click="isEdit = !isEdit">Edit</button>
         </div>
 
@@ -13,6 +14,7 @@
             <form>
                 <input v-model="blog.title" />
                 <textarea v-model="blog.content" />
+                <input v-model="blog.picture" />
                 <button type="submit" @click="onSubmit">Save</button>
             </form>
         </div>
@@ -40,13 +42,14 @@ useHead({
 const isEdit = ref(false)
 const formData = reactive({
     title: '',
-    content: ''
+    content: '',
+    picture: ''
 })
 const route = useRoute()
 interface IBlogModel {
     data: BlogModel
 }
-const { data: item, error } = await useFetch<IBlogModel>('/api/blog/' + route.params.id, {
+const { data: item, error } = await useFetch<IBlogModel>('http://localhost:3001/api/blog/' + route.params.id, {
     pick: ['data'],
 
 
@@ -61,11 +64,12 @@ const onSubmit = async (e: Event) => {
     e.preventDefault()
     try {
         console.debug('submit', blog.value)
-        const { data: item } = await useFetch<{ data: number }>('/api/blog/' + route.params.id, {
+        const { data: item } = await useFetch<{ data: number }>('http://localhost:3001/api/blog/' + route.params.id, {
             method: 'PUT',
             body: JSON.stringify({
                 title: blog.value?.title,
-                content: blog.value?.content
+                content: blog.value?.content,
+                picture: blog.value?.picture
             })
 
         })

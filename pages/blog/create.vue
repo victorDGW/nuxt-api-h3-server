@@ -12,6 +12,10 @@
                 <textarea id="content" name="content" placeholder="write your content" required
                     v-model="form.content"></textarea>
             </div>
+            <div>
+                <label for="picture">picture</label>
+                <input type="text" id="picture" name="picture" placeholder="Enter url" required v-model="form.picture" />
+            </div>
             <button type="submit">Submit post</button>
             <NuxtLink to="/blog">Back</NuxtLink>
 
@@ -28,18 +32,20 @@ const router = useRouter()
 
 const form = reactive({
     title: 'Add title',
-    content: 'default content '
+    content: 'default content ',
+    picture: 'https://placehold.co/400'
 })
 
 const onsubmit = async () => {
     try {
-        await $fetch('/api/blog', {
+        await $fetch('http://localhost:3001/api/blog', {
             method: 'POST',
             body: JSON.stringify(form)
         })
         router.push('/blog')
 
     } catch (error) {
+        alert('error to create blog')
         console.log(error)
         throw error
 

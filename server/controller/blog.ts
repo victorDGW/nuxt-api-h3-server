@@ -25,6 +25,7 @@ export const create = async (event: H3Event) => {
 		const result = await BlogModel.create({
 			title: body.title,
 			content: body.content,
+			picture: body.picture,
 		})
 		return {
 			data: result,
@@ -73,6 +74,7 @@ export const update = async (event: H3Event) => {
 		const result = await BlogModel.update(+idBlog, {
 			title: body.title,
 			content: body.content,
+			picture: body.picture,
 		})
 		console.log("result controller ", result)
 		if (result === 0) {

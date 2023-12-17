@@ -25,13 +25,16 @@ const getById = async (id: number) => {
 	return result
 }
 
-const create = async (blog: Pick<BlogModel, "title" | "content">) => {
+const create = async (
+	blog: Pick<BlogModel, "title" | "content" | "picture">
+) => {
 	const result = await new Promise<number>((resolve, reject) => {
 		connection.run(
-			"INSERT INTO blogs (title, content, createdAt, updatedAt) VALUES (?, ?, ?, ?)",
+			"INSERT INTO blogs (title, content,picture, createdAt, updatedAt) VALUES (?, ?, ?,?, ?)",
 			[
 				blog.title,
 				blog.content,
+				blog.picture,
 				new Date().toISOString(),
 				new Date().toISOString(),
 			],
@@ -48,12 +51,18 @@ const create = async (blog: Pick<BlogModel, "title" | "content">) => {
 
 const update = async (
 	idBlog: number,
-	blog: Pick<BlogModel, "title" | "content">
+	blog: Pick<BlogModel, "title" | "content" | "picture">
 ) => {
 	const result = await new Promise<number>((resolve, reject) => {
 		connection.run(
-			"UPDATE blogs SET title = ?, content = ?, updatedAt = ? WHERE id = ?",
-			[blog.title, blog.content, new Date().toISOString(), +idBlog],
+			"UPDATE blogs SET title = ?, content = ?, picture = ? , updatedAt = ? WHERE id = ?",
+			[
+				blog.title,
+				blog.content,
+				blog.picture,
+				new Date().toISOString(),
+				+idBlog,
+			],
 			function (err) {
 				if (err) {
 					reject(err)
