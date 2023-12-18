@@ -7,7 +7,7 @@ import "uno.css";
 <template>
   <div>
     <header>
-      <nav>
+      <nav class="sticky-element">
         <ul>
           <li>
             <NuxtLink to="/">HOME PAGE</NuxtLink>
@@ -15,7 +15,7 @@ import "uno.css";
           <li>
             <NuxtLink to="/blog">Blog </NuxtLink>
           </li>
-          <li>menu3</li>
+          <li>Non attribué</li>
         </ul>
       </nav>
     </header>
@@ -25,11 +25,31 @@ import "uno.css";
 
 <style scoped>
 nav {
-  background-color: #ccc;
+  background-color: #ecedee;
+
+
+}
+
+.sticky-element {
+  position: -webkit-sticky;
+  /* Pour la compatibilité avec Safari/IOS */
+  position: sticky;
+  top: 20px;
 }
 
 ul {
   display: flex;
   justify-content: space-around;
+
+}
+
+li {
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+li:hover {
+  cursor: pointer;
+  color: #60a4f8;
 }
 </style>

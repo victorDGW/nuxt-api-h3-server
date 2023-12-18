@@ -1,12 +1,14 @@
 <template>
     <div>
-        <h1 class="text-2xl">Blog detail</h1>
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            <NuxtLink to="/blog">BACK</NuxtLink>
+        <div class="flex justify-between w-full items-center">
+            <h1 class="text-2xl text-center my-4">Description</h1>
+            <button class="my-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                <NuxtLink to="/blog">BACK</NuxtLink>
+            </button>
+        </div>
 
-        </button>
         <div v-if="blog && !isEdit">
-            <h2>{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
+            <h2 class="text-xl py-2 text-blue-500">{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
             <p>{{ blog.content }}</p>
             <img class="rounded" width='400px' :src="blog.picture" alt="blog picture" />
             <br />
@@ -20,7 +22,7 @@
             <form class=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class=" flex gap-10">
 
-                    <label for="title">Title</label>
+                    <label for="title ">Title</label>
                     <input class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" v-model="blog.title" />
                 </div>
                 <div class="flex gap-10">
@@ -43,7 +45,7 @@
         <div v-else>
             <h2>Blog not found</h2>
         </div>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        <button class="my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             @click="onDelete">Delete</button>
         <br />
 

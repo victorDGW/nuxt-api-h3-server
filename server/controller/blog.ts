@@ -1,4 +1,3 @@
-import { Body } from "./../../.nuxt/components.d"
 import * as BlogModel from "./../model/blog"
 import { H3Event } from "h3"
 

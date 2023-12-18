@@ -1,9 +1,9 @@
 
 <template>
   <div>
-    <h1 class="text-2xl ">Blog List</h1>
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-      <NuxtLink to="/blog/create">Add Blog</NuxtLink>
+    <h1 class="text-2xl text-center my-4">List blog </h1>
+    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded my-4">
+      <NuxtLink to="/blog/create">Add blog</NuxtLink>
     </button>
     <div class=" flex  flex-wrap rounded bg-blue-200 p-2 m-2 gap-10">
 
@@ -11,7 +11,7 @@
         :key="blog.id">
         <div class="flex flex-col  ">
           <div>
-            <h2 class="text-xl font-bold">{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
+            <h2 class="text-xl font-bold my-2 ">{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
             <p>{{ blog.content }}</p>
             <img class="rounded " width="" :src="blog.picture" :alt="`image-${blog.title}.jpg `" />
             <br />

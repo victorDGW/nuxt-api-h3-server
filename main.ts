@@ -18,20 +18,23 @@ function initializeDatabase() {
 	insert.run(
 		"Mon premier article",
 		"Ceci est mon premier article",
-		"2021-01-01",
-		"2021-01-01"
+		"https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_1280.jpg",
+		"17T16:50:04.206Z",
+		"17T16:50:04.206Z"
 	)
 	insert.run(
 		"Mon deuxième article",
 		"Ceci est mon deuxième article",
-		"2021-01-02",
-		"2021-01-02"
+		"https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_1280.jpg",
+		"18T12:10:54.705Z",
+		"18T12:10:54.705Z"
 	)
 	insert.run(
 		"Mon troisième article",
 		"Ceci est mon troisième article",
-		"2021-01-03",
-		"2021-01-03"
+		"https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_1280.jpg",
+		"17T16:50:40.385Z",
+		"17T16:50:40.385Z"
 	)
 	insert.finalize()
 
