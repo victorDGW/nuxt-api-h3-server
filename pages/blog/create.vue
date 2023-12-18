@@ -29,6 +29,7 @@ useHead({
     title: 'add Blog',
 
 })
+const BASE_URL = useRuntimeConfig().public.BASE_URL
 const router = useRouter()
 
 const form = reactive({
@@ -39,7 +40,7 @@ const form = reactive({
 
 const onsubmit = async () => {
     try {
-        await $fetch('http://localhost:3001/api/blog', {
+        await $fetch(`${BASE_URL}/api/blog/`, {
             method: 'POST',
             body: JSON.stringify(form)
         })

@@ -31,12 +31,12 @@
 </template>
 <script lang="ts" setup>
 import type BlogModel from '~/types/blog';
-
+const BASE_URL = useRuntimeConfig().public.BASE_URL
 interface Idata {
   data: BlogModel[]
 }
-
-const { data: items, error } = await useFetch<Idata>('http://localhost:3001/api/blog/', {
+console.log(BASE_URL)
+const { data: items, error } = await useFetch<Idata>(`${BASE_URL}/api/blog/`, {
   pick: ['data']
 
 })

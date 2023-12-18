@@ -1,27 +1,41 @@
 <template>
     <div>
-        <h1>Blog detail</h1>
+        <h1 class="text-2xl">Blog detail</h1>
         <div v-if="blog && !isEdit">
             <h2>{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
             <p>{{ blog.content }}</p>
             <img width='400px' :src="blog.picture" alt="blog picture" />
             <br />
-            <button @click="isEdit = !isEdit">Edit</button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                @click="isEdit = !isEdit">Edit</button>
         </div>
 
 
         <div v-else-if="blog && isEdit">
-            <form>
-                <input v-model="blog.title" />
-                <textarea v-model="blog.content" />
-                <input v-model="blog.picture" />
-                <button type="submit" @click="onSubmit">Save</button>
+            <form class="max-w-sm mx-auto">
+                <div class="flex gap-10">
+
+                    <label for="title">Title</label>
+                    <input class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" v-model="blog.title" />
+                </div>
+                <div class="flex gap-10">
+                    <label for="content">Content</label>
+                    <textarea v-model="blog.content" />
+                </div>
+                <div class="flex gap-10">
+                    <label for="picture">picture</label>
+                    <input v-model="blog.picture" />
+                </div>
+                <br />
+                <button
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="submit" @click="onSubmit">Save</button>
             </form>
         </div>
         <div v-else>
             <h2>Blog not found</h2>
         </div>
-        <button>Delete</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button>
         <br />
         <span>crée le : {{ blog?.createdAt }}</span>
         <br />
@@ -33,7 +47,8 @@
 <script setup lang="ts">
 
 import type BlogModel from '~/types/blog';
-
+const BASE_URL = useRuntimeConfig().public.BASE_URL
+console.log(BASE_URL)
 useHead({
     title: 'Blog Page',
 
@@ -49,7 +64,7 @@ const route = useRoute()
 interface IBlogModel {
     data: BlogModel
 }
-const { data: item, error } = await useFetch<IBlogModel>('http://localhost:3001/api/blog/' + route.params.id, {
+const { data: item, error } = await useFetch<IBlogModel>(`${BASE_URL}/api/blog/${route.params.id}`, {
     pick: ['data'],
 
 
@@ -64,7 +79,7 @@ const onSubmit = async (e: Event) => {
     e.preventDefault()
     try {
         console.debug('submit', blog.value)
-        const { data: item } = await useFetch<{ data: number }>('http://localhost:3001/api/blog/' + route.params.id, {
+        const { data: item } = await useFetch<{ data: number }>(`${BASE_URL}/api/blog/${route.params.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 title: blog.value?.title,
