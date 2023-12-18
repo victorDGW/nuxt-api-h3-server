@@ -2,5 +2,5 @@
 export default defineNuxtConfig({
 	devtools: { enabled: true },
 	ssr: true,
-	modules: ["@unocss/nuxt"],
+	modules: ["@unocss/nuxt", "@nuxtjs/tailwindcss"],
 })

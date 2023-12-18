@@ -1,4 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import "@unocss/reset/tailwind.css";
+import "uno.css";
+
+</script>
 
 <template>
   <div>

@@ -16,7 +16,8 @@
                 <label for="picture">picture</label>
                 <input type="text" id="picture" name="picture" placeholder="Enter url" required v-model="form.picture" />
             </div>
-            <button type="submit">Submit post</button>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit
+                post</button>
             <NuxtLink to="/blog">Back</NuxtLink>
 
         </form>
