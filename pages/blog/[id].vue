@@ -1,19 +1,24 @@
 <template>
     <div>
         <h1 class="text-2xl">Blog detail</h1>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            <NuxtLink to="/blog">BACK</NuxtLink>
+
+        </button>
         <div v-if="blog && !isEdit">
             <h2>{{ blog?.title ? blog.title : `Aucun titre #${blog.id}` }}</h2>
             <p>{{ blog.content }}</p>
-            <img width='400px' :src="blog.picture" alt="blog picture" />
+            <img class="rounded" width='400px' :src="blog.picture" alt="blog picture" />
             <br />
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 @click="isEdit = !isEdit">Edit</button>
+
         </div>
 
 
         <div v-else-if="blog && isEdit">
-            <form class="max-w-sm mx-auto">
-                <div class="flex gap-10">
+            <form class=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div class=" flex gap-10">
 
                     <label for="title">Title</label>
                     <input class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" v-model="blog.title" />
@@ -27,19 +32,21 @@
                     <input v-model="blog.picture" />
                 </div>
                 <br />
-                <button
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="submit" @click="onSubmit">Save</button>
+                <span>crée le : {{ blog?.createdAt }}</span>
+                <br />
+                <span>modifé le : {{ blog?.updatedAt }}</span>
+                <br />
+                <button class="text-white bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
+                    @click="onSubmit">Save</button>
             </form>
         </div>
         <div v-else>
             <h2>Blog not found</h2>
         </div>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            @click="onDelete">Delete</button>
         <br />
-        <span>crée le : {{ blog?.createdAt }}</span>
-        <br />
-        <span>modifé le : {{ blog?.updatedAt }}</span>
+
 
     </div>
 </template>
@@ -61,6 +68,7 @@ const formData = reactive({
     picture: ''
 })
 const route = useRoute()
+const router = useRouter()
 interface IBlogModel {
     data: BlogModel
 }
@@ -103,6 +111,24 @@ const onSubmit = async (e: Event) => {
 
 
 
+}
+
+const onDelete = async () => {
+    try {
+        console.log('delete', route.params.id)
+        const { data: item } = await useFetch<{ data: number }>(`${BASE_URL}/api/blog/${route.params.id}`, {
+            method: 'DELETE',
+
+        })
+        console.log(item)
+        if (item.value?.data) {
+            router.push('/blog')
+        }
+    } catch (error: any) {
+        console.error(error)
+        alert('error to delete blog')
+        throw error
+    }
 }
 
 </script>
