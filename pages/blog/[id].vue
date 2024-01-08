@@ -19,7 +19,7 @@
 
 
         <div v-else-if="blog && isEdit">
-            <form class=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form @submit.prevent="onSubmit" class=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class=" flex gap-10">
 
                     <label for="title ">Title</label>
@@ -38,8 +38,8 @@
                 <br />
                 <span>modifé le : {{ blog?.updatedAt }}</span>
                 <br />
-                <button class="text-white bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
-                    @click="onSubmit">Save</button>
+                <button type="button"
+                    class="text-white bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Save</button>
             </form>
         </div>
         <div v-else>
